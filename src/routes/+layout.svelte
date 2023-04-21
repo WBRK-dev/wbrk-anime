@@ -1,7 +1,6 @@
-<!-- <script>
-    /** @type {import('./$types').PageData} */    
-    export let data;
-</script> -->
+<script>
+    export const prerender = true;
+</script>
 
 
 <head>
