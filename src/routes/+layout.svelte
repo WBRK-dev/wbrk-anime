@@ -1,7 +1,7 @@
 
 
 <svelte:head>
-    <link rel="stylesheet" href="http://wbrk.netlify.app/wbrk.css/wbrk.css">
+    <link rel="stylesheet" href="/src/wbrk.css/wbrk.css">
     <title>WBR_K Anime</title>
 </svelte:head>
 
