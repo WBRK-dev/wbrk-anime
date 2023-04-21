@@ -29,7 +29,7 @@
 <main>
     <div class="content">
         <div class="stream">
-            <iframe src="{streams[0].url}" title="Anime WebView" frameborder="0" sandbox="allow-same-origin allow-scripts"></iframe>
+            <iframe src="{streams[0].url}" title="Anime WebView" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts"></iframe>
             <div class="controls"><p>Previous</p><p>Next</p></div>
         </div>
         <div class="servers">
