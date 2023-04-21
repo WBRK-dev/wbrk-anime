@@ -1,4 +1,6 @@
-
+<script>
+    import Searchbar from "../components/searchbar.svelte";
+</script>
 
 <svelte:head>
     <link rel="stylesheet" href="/wbrk.css/wbrk.css">
@@ -8,6 +10,7 @@
 <body>
     <header>
         <a class="title" href="/">WBR_K Anime</a>
+        <Searchbar/>
         <div class="right">
             <a href="/watch">Featured</a>
         </div>
@@ -16,6 +19,10 @@
 </body>
 
 <style>
+    header {
+        position: relative;
+    }
+
     header .title {
         color: #000;
         text-decoration: none;
