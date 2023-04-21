@@ -1,0 +1,39 @@
+header {
+    background-color: var(--bg);
+    height: 50px;
+    border-bottom: 1px solid var(--border);
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .title {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+header .right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .button {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+header .button:hover {
+    background-color: var(--header-button-hover);
+}
+
+header .button img {
+    height: 30px;
+}

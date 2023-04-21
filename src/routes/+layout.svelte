@@ -1,7 +1,7 @@
 
 
 <head>
-    <link rel="stylesheet" href="http://192.168.178.21/wbrk2.css/wbrk.css/wbrk.css">
+    <link rel="stylesheet" href="/src/routes/wbrk.css/wbrk.css">
     <title>WBR_K Anime</title>
 </head>
 
