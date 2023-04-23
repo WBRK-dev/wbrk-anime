@@ -41,11 +41,11 @@
 <style>
     main {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr; grid-auto-rows: 0;
         height: calc(100vh - 71px);
         height: calc(100dvh - 71px);
-        padding: 10px; gap: 10px;
+        padding: 10px;
     }
 
     main .card {
@@ -56,6 +56,10 @@
         cursor: pointer;
 
         transition: transform 250ms, box-shadow 250ms;
+    }
+
+    main .card:not(:first-of-type) {
+        margin-left: 10px;
     }
 
     main .card:hover {
@@ -85,5 +89,20 @@
         font-weight: 700;
         color: #fff;
         font-size: 28px;
+    }
+
+
+
+
+    @media only screen and (max-width: 1400px) {
+        main {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media only screen and (max-width: 700px) {
+        main {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
