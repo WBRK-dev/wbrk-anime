@@ -39,6 +39,10 @@
         box-shadow: 0 0 5px #000;
     }
 
+    a:not(:first-of-type) {
+        margin-left: 10px;
+    }
+
     a img {
         width: 100%;
         aspect-ratio: 100/131;
