@@ -4,14 +4,14 @@
     let anime = [{},{},{}];
 
     onMount(() => {
-        fetch("https://api.consumet.org/anime/gogoanime/top-airing")
+        fetch("https://api.consumet.org/meta/anilist/trending")
         .then(r => r.json())
         .then(json => {
             let count = 0;
             while(anime[2].title === undefined) {
                 let random = Math.floor((json.results.length - 1) * (Math.floor(Math.random()*10)/10));
                 if (anime[(count - 1)] === undefined || anime[count - 1].id !== json.results[random].id) {
-                    anime[count].title = json.results[random].title;
+                    anime[count].title = json.results[random].title.userPreferred;
                     anime[count].id = json.results[random].id;
                     anime[count].image = json.results[random].image;
                     count++;
