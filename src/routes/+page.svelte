@@ -121,12 +121,11 @@
 
     animewrapper {
         display: grid;
-        gap: 10px;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         grid-template-rows: 1fr;
         grid-auto-rows: 0;
     }
-
+    
 
 
     @media only screen and (max-width: 800px) {
