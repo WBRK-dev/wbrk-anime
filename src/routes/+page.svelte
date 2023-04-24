@@ -127,6 +127,7 @@
 
         width: calc(100% + 10px);
         margin-left: -10px;
+        margin-top: -10px;
     }
     
 
