@@ -2,24 +2,28 @@
     import { onMount } from "svelte";
     import HeroCard from "../components/topairingcard.svelte";
     import AnimeCard from "../components/animecard.svelte";
+    import Spinner from "../components/spinner.svelte";
     /**@type {Array<string> | any[]}*/
-    let topAiringAnime = [{title: "", id:"id", img: "#"}];
+    let topAiringAnime = [];
+    /**@type {Array<string> | any[]}*/
+        let topAiringAnimeTemp = [];
     /**@type {Array<string> | any[]}*/
     let watchingAnime = [];
     /**@type {Array<string> | any[]}*/
-    let recentEpisodes = [{title: "", id:"id", img: "#"}];
+    let recentEpisodes = [];
     
     onMount(async () => {
         fetch("https://api.consumet.org/anime/gogoanime/top-airing")
         .then(response => response.json())
         .then(json => {
-            topAiringAnime = json.results;
+            topAiringAnimeTemp = json.results;
             fetch("https://api.consumet.org/anime/gogoanime/top-airing?page=2")
             .then(response => response.json())
             .then(json => {
                 for (let i = 0; i < json.results.length; i++) {
-                    topAiringAnime.push(json.results[i]);
+                    topAiringAnimeTemp.push(json.results[i]);
                 }
+                topAiringAnime = topAiringAnimeTemp;
                 for (let i = 0; i < topAiringAnime.length; i++) {
                     fetch(`https://api.consumet.org/anime/gogoanime/info/${topAiringAnime[i].id}`)
                     .then(response => response.json())
@@ -27,7 +31,6 @@
                         topAiringAnime[i].subOrDub = data.subOrDub;
                         topAiringAnime[i].totalEpisodes = data.totalEpisodes;
                         topAiringAnime[i].releaseDate = data.releaseDate;
-                        // console.log(data, topAiringAnime);
                     })
                 }
             })
@@ -61,20 +64,22 @@
 </script>
 
 <main>
-    <HeroCard title={topAiringAnime[0].title} id={topAiringAnime[0].id} img={topAiringAnime[0].image}/>
+    <HeroCard topAiringAnime={topAiringAnime}/>
 
-    {#if topAiringAnime.length > 0}
     <section id="popular">
         <p class="title">Popular Anime</p>
-        <animewrapper>
-            {#each topAiringAnime as anime}
-                {#if anime.title !== ""}
-                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} />
-                {/if}
-            {/each}
-        </animewrapper>
+        {#if topAiringAnime.length > 0}
+            <animewrapper>
+                {#each topAiringAnime as anime}
+                    {#if anime.title !== ""}
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} />
+                    {/if}
+                {/each}
+            </animewrapper>  
+        {:else}
+        <div class="spinner"><Spinner/></div>
+        {/if}
     </section>
-    {/if}
     {#if watchingAnime.length > 0}
     <section>
         <p class="title">Continue Watching</p>
@@ -87,18 +92,20 @@
         </animewrapper>
     </section>
     {/if}
-    {#if recentEpisodes.length > 0}
     <section>
         <p class="title">Recent Episodes</p>
-        <animewrapper>
-            {#each recentEpisodes as anime}
-                {#if anime.title !== ""}
-                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate}/>
-                {/if}
-            {/each}
-        </animewrapper>
+        {#if recentEpisodes.length > 0}
+            <animewrapper>
+                {#each recentEpisodes as anime}
+                    {#if anime.title !== ""}
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate}/>
+                    {/if}
+                {/each}
+            </animewrapper>
+        {:else}
+            <div class="spinner"><Spinner/></div>
+        {/if}
     </section>
-    {/if}
 </main>
 
 <style>
@@ -128,6 +135,10 @@
         width: calc(100% + 10px);
         margin-left: -10px;
         margin-top: -10px;
+    }
+
+    .spinner {
+        padding: 10px;
     }
     
 
