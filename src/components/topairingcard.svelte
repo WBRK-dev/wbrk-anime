@@ -12,7 +12,7 @@
         <div class="info">
             <p class="title">{topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].title}</p>
             <p class="id">Released: {topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].releaseDate}</p>
-            <div class="flex">
+            <div class="flex" id="categories">
                 {#each topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].genres as genre}
                     <p class="tag">{genre}</p>
                 {/each}
@@ -68,6 +68,9 @@
     hero .title {
         font-weight: 700;
         font-size: 24px;
+
+        max-height: 100px;
+        overflow: hidden auto;
     }
 
     hero .info .buttonbox {
@@ -106,5 +109,20 @@
         border-radius: 50px;
         background-color: #a8a8a8;
         padding: 4px 8px;
+    }
+
+
+    @media only screen and (max-width: 500px) {
+        #categories > * {
+            display: none;
+        }
+
+        #categories > *:first-of-type {
+            display: block;
+        }
+
+        hero .title {
+            font-size: 5vw;
+        }
     }
 </style>
