@@ -24,6 +24,9 @@
         box-shadow: 0 0 2px #00000041;
         border-radius: 10px;
 
+        margin-left: 10px;
+        margin-top: 10px;
+
         color: #000;
         text-decoration: none;
 
