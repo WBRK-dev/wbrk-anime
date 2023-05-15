@@ -29,9 +29,7 @@
         <a href="watch/{animeObj.id}" class="card">
             <img src="{animeObj.image}" alt="">
             <div class="info">
-                <div>
-                    <p class="title">{animeObj.title}</p>
-                </div>
+                <p class="title">{animeObj.title}</p>
             </div>
         </a>
         {/if}
@@ -78,12 +76,11 @@
         position: absolute;
         bottom: 0; left: 0;
         padding: 10px;
-        width: 100%; height: 100px;
+        width: 100%; min-height: 100px;
         box-sizing: border-box;
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.658) 0%, rgba(0,0,0,0) 100%);
+        display: flex; gap: 10px; flex-wrap: wrap; align-items: end;
     }
-
-    main .card .info > div {height: 100%; display: flex; gap: 10px; flex-wrap: wrap; align-items: end;}
 
     main .info .title {
         font-weight: 700;
