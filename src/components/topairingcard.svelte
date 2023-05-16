@@ -3,7 +3,6 @@
     /**@type {any}*/
     export let topAiringAnime;
     let selectedAnime = Math.random();
-    console.log(topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)]);
 </script>
 
 <hero>
