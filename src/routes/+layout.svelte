@@ -14,7 +14,7 @@
             }
             localStorage.setItem("code_verifier", code);
         } else {
-            code = localStorage.getItem("code_verifier");
+            code = localStorage.getItem("code_verifier") || "";
         }
     }
 </script>
