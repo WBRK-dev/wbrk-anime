@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import HeroCard from "../components/topairingcard.svelte";
     import AnimeCard from "../components/animecard.svelte";
+    import AnimeCardSkel from "../components/animecardskeleton.svelte";
     import Spinner from "../components/spinner.svelte";
     /**@type {Array<string> | any[]}*/
     let topAiringAnime = [];
@@ -68,43 +69,41 @@
 
     <section id="popular">
         <p class="title">Popular Anime</p>
-        {#if topAiringAnime.length > 0}
-            <animewrapper>
-                {#each topAiringAnime as anime}
-                    {#if anime.title !== ""}
+        <animewrapper>
+                {#if topAiringAnime.length > 0}
+                    {#each topAiringAnime as anime}
                         <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} />
-                    {/if}
-                {/each}
-            </animewrapper>  
-        {:else}
-        <div class="spinner"><Spinner/></div>
-        {/if}
+                    {/each}
+                {:else}
+                    {#each {length: 16} as _, i}
+                        <AnimeCardSkel/>
+                    {/each}
+                {/if}
+        </animewrapper>
     </section>
     {#if watchingAnime.length > 0}
     <section>
         <p class="title">Continue Watching</p>
         <animewrapper>
             {#each watchingAnime as anime}
-                {#if anime.title !== ""}
-                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate=""/>
-                {/if}
+                <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate=""/>
             {/each}
         </animewrapper>
     </section>
     {/if}
     <section>
         <p class="title">Recent Episodes</p>
-        {#if recentEpisodes.length > 0}
-            <animewrapper>
-                {#each recentEpisodes as anime}
-                    {#if anime.title !== ""}
-                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate}/>
-                    {/if}
-                {/each}
-            </animewrapper>
-        {:else}
-            <div class="spinner"><Spinner/></div>
-        {/if}
+        <animewrapper>
+                {#if recentEpisodes.length > 0}
+                    {#each recentEpisodes as anime}
+                            <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate}/>
+                    {/each}
+                {:else}
+                    {#each {length: 16} as _, i}
+                        <AnimeCardSkel/>
+                    {/each}
+                {/if}
+        </animewrapper>
     </section>
 </main>
 
