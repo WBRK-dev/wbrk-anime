@@ -170,6 +170,14 @@
         color: #fff; text-decoration: none;
         padding: 10px 14px;
         border-radius: 8px;
+
+        animation: shadow 2s infinite;
+    }
+
+    @keyframes shadow {
+        0% {box-shadow: 0 0 15px #0000ff75;}
+        50% {box-shadow: 0 0 15px #0000ff;}
+        100% {box-shadow: 0 0 15px #0000ff75;}
     }
     
 
