@@ -13,7 +13,7 @@
 <body>
     <header>
         <a class="title" href="/">WBR_K Anime</a>
-        <Searchbar/>
+        <!-- <Searchbar/> -->
         <div class="right">
             <a href="/watch">Featured</a>
         </div>
