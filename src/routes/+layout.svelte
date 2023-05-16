@@ -1,5 +1,12 @@
 <script>
+    import { browser } from "$app/environment";
+    import { onMount } from "svelte";
     import Searchbar from "../components/searchbar.svelte";
+
+    let accesstoken = "";
+    if (browser) {
+        accesstoken = localStorage.getItem("accesstoken") || "";
+    }
 </script>
 
 <svelte:head>
@@ -17,6 +24,11 @@
         <div class="right">
             <a href="/watch">Featured</a>
         </div>
+        {#if accesstoken === ""}
+            <a href='./'>Login</a>
+        {:else}
+            <a href='account/'>Account</a>
+        {/if}
     </header>
     <slot></slot>
 </body>

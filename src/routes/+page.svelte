@@ -1,9 +1,11 @@
 <script>
+    import { browser } from "$app/environment";
     import { onMount } from "svelte";
     import HeroCard from "../components/topairingcard.svelte";
     import AnimeCard from "../components/animecard.svelte";
     import AnimeCardSkel from "../components/animecardskeleton.svelte";
-    import Spinner from "../components/spinner.svelte";
+    /**@type {any}*/
+    export let data;
     /**@type {Array<string> | any[]}*/
     let topAiringAnime = [];
     /**@type {Array<string> | any[]}*/
@@ -12,6 +14,12 @@
     let watchingAnime = [];
     /**@type {Array<string> | any[]}*/
     let recentEpisodes = [];
+
+    let accesstoken = "";
+    if (browser) {
+        accesstoken = localStorage.getItem("accesstoken") || "";
+        console.log(accesstoken);
+    }
     
     onMount(async () => {
         fetch("https://api.consumet.org/anime/gogoanime/top-airing")
@@ -81,16 +89,23 @@
                 {/if}
         </animewrapper>
     </section>
-    {#if watchingAnime.length > 0}
     <section>
         <p class="title">Continue Watching</p>
-        <animewrapper>
-            {#each watchingAnime as anime}
-                <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate=""/>
-            {/each}
-        </animewrapper>
+        {#if watchingAnime.length > 0 && accesstoken !== ""}
+            <animewrapper>
+                {#each watchingAnime as anime}
+                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate=""/>
+                {/each}
+            </animewrapper>
+        {:else if watchingAnime.length === 0 && accesstoken !== ""}
+            <p>Watch Anime to continue your watching history.</p>
+        {:else}
+            <div class="show">
+                <p class="title">Login with My Anime List to create your watch history.</p>
+                <a href="./">Login With MAL</a>
+            </div>
+        {/if}
     </section>
-    {/if}
     <section>
         <p class="title">Recent Episodes</p>
         <animewrapper>
@@ -136,8 +151,25 @@
         margin-top: -10px;
     }
 
-    .spinner {
-        padding: 10px;
+    .show {
+        padding: 40px 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .show .title {
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .show a {
+        background-color: blue;
+        color: #fff; text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 8px;
     }
     
 
