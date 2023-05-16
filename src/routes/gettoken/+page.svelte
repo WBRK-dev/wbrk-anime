@@ -14,10 +14,10 @@
     onMount(async () => {
         const response = await fetch("https://myanimelist.net/v1/oauth2/token?client_id=fb5613df0f39524a295b0d1d7a6213ca&client_secret=6a5608848f4b676ccc737203f6dd56322505706bb3a457e52c342125be0fd393&grant_type=authorization_code&code="+authorizationtoken+"&code_verifier=", {
             method: "POST",
-            mode: "no-cors",
+            mode: "cors",
             cache: "no-cache",
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({client_id: "fb5613df0f39524a295b0d1d7a6213ca", client_secret: "6a5608848f4b676ccc737203f6dd56322505706bb3a457e52c342125be0fd393", grant_type: "authorization_code", code: authorizationtoken, code_verifier: ""}),
         });
