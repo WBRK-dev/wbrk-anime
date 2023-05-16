@@ -34,7 +34,7 @@
 
     @keyframes skeleton {
         0% {right: 0%;}
-        30% {right: 0%;}
+        80% {right: -400%;}
         100% {right: -400%;}
     }
 
@@ -49,6 +49,6 @@
         border-radius: 10px;
     }
     .skeleton#sub {margin-bottom: 10px;}
-    .skeleton#text::before {animation: skeleton 2s 100ms infinite ease-in;}
-    .skeleton#sub::before {animation: skeleton 2s 200ms infinite ease-in;}
+    .skeleton#text::before {animation: skeleton 2s 300ms infinite ease-in;}
+    .skeleton#sub::before {animation: skeleton 2s 600ms infinite ease-in;}
 </style>
