@@ -5,7 +5,7 @@
     import { onMount } from 'svelte';
     
     let authorizationtoken = $page.url.searchParams.get('code');
-    let accesstoken = "Failed Logging in";
+    let accesstoken = "";
 
     onMount(async () => {
         const response = await fetch("https://fair-red-agouti-robe.cyclic.app/accesstoken/authorize?code="+authorizationtoken);
@@ -13,6 +13,8 @@
             let json = await response.json();
             if (json.succesfull) {
                 accesstoken = "Logged In"
+            } else {
+                accesstoken = "Failed to login"
             }
         }
     })
@@ -23,7 +25,7 @@
         {#if accesstoken === ""}
             <div class="spinner"><Spinner/></div>
         {:else}
-            {accesstoken}
+            <div class="spinner">{accesstoken}</div>
         {/if}
     </div>
 </main>
