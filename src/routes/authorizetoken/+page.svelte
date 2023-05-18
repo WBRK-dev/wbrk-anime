@@ -5,13 +5,14 @@
     import { onMount } from 'svelte';
     
     let authorizationtoken = $page.url.searchParams.get('code');
-    let accesstoken = ""; let refreshtoken = ""; let code_verifier = "";
-    if (browser) {
-        code_verifier = localStorage.getItem("code_verifier") || "";
-    }
+    let accesstoken = "";
 
     onMount(async () => {
-        const response = await fetch("https://fair-red-agouti-robe.cyclic.app/accesstoken/authorize?code="+authorizationtoken);
+        const response = await fetch("https://fair-red-agouti-robe.cyclic.app/accesstoken/authorize?code="+authorizationtoken {
+            headers: {
+                "Access-Control-Allow-Origin": "https://fair-red-agouti-robe.cyclic.app"
+            }
+        });
         console.log(response);
         let json = await response.json();
         console.log(json);
