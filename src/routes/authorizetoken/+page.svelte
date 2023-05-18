@@ -11,7 +11,8 @@
     }
 
     onMount(async () => {
-        const response = await fetch("localhost:8088/accesstoken/authorize?code="+authorizationtoken);
+        const response = await fetch("https://fair-red-agouti-robe.cyclic.app/accesstoken/authorize?code="+authorizationtoken);
+        console.log(response);
         let json = await response.json();
         console.log(json);
     })
