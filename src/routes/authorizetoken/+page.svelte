@@ -8,7 +8,7 @@
     let accesstoken = "";
 
     onMount(async () => {
-        const response = await fetch("https://fair-red-agouti-robe.cyclic.app/accesstoken/authorize?code="+authorizationtoken {
+        const response = await fetch("https://fair-red-agouti-robe.cyclic.app/accesstoken/authorize?code="+authorizationtoken, {
             headers: {
                 "Access-Control-Allow-Origin": "https://fair-red-agouti-robe.cyclic.app"
             }
