@@ -8,11 +8,15 @@
     let accesstoken = "";
 
     onMount(async () => {
-        const response = await fetch("https://fair-red-agouti-robe.cyclic.app/accesstoken/authorize?code="+authorizationtoken);
+        const response = await fetch("https://fair-red-agouti-robe.cyclic.app/authorize?code="+authorizationtoken);
         if (response.status === 200) {
             let json = await response.json();
             if (json.succesfull) {
                 accesstoken = "Logged In"
+                if (browser) {
+                    localStorage.setItem("userid", json.userid);
+                    localStorage.setItem("accesstoken", json.accesstoken);
+                }
             } else {
                 accesstoken = "Failed to login"
             }

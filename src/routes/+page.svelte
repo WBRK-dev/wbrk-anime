@@ -4,6 +4,7 @@
     import HeroCard from "../components/topairingcard.svelte";
     import AnimeCard from "../components/animecard.svelte";
     import AnimeCardSkel from "../components/animecardskeleton.svelte";
+    let code = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
     /**@type {any}*/
     export let data;
     /**@type {Array<string> | any[]}*/
@@ -14,6 +15,7 @@
     let watchingAnime = [];
     /**@type {Array<string> | any[]}*/
     let recentEpisodes = [];
+    let impMessage = "none";
 
     let accesstoken = "";
     if (browser) {
@@ -43,7 +45,7 @@
                     })
                 }
             })
-        })
+        }).catch(err => {impMessage = "block"})
 
         fetch("https://api.consumet.org/anime/gogoanime/recent-episodes")
         .then(response => response.json())
@@ -73,6 +75,8 @@
 </script>
 
 <main>
+    <div class="impMessage" style="display: {impMessage};">Some important services are offline. <a href="/status">WBRK Anime Status</a></div>
+
     <HeroCard topAiringAnime={topAiringAnime}/>
 
     <section id="popular">
@@ -102,7 +106,7 @@
         {:else}
             <div class="show">
                 <p class="title">Login with My Anime List to create your watch history.</p>
-                <a href="./">Login With MAL</a>
+                <a href='https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=fb5613df0f39524a295b0d1d7a6213ca&code_challenge={code}'>Login With MAL</a>
             </div>
         {/if}
     </section>
@@ -139,6 +143,8 @@
     section > .title {
         font-weight: 700;
     }
+
+    .impMessage {text-align: center;}
 
     animewrapper {
         display: grid;
