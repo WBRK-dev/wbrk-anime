@@ -70,10 +70,19 @@
         })
 
         fetch("https://wbrk-anime-api.vercel.app/api/list/get", {credentials: "include"})
-        .then(r => r.json())
-        .then(r => {
-            console.log(r);
+        .then(r => r.json()).then(r => {
+            if (r.error) {watchingAnime = false; return;}
+            for (let i = 0; i < r.data.length; i++) {
+                watchingAnime.push({
+                    id: r.data[i].node.id,
+                    title: r.data[i].node.title,
+                    image: r.data[i].node.main_picture.medium,
+                    status: r.data[i].list_status.status,
+                    epsWatched: r.data[i].list_status.num_episodes_watched
+                })
+            }
         })
+        .catch(err => {watchingAnime = false})
         
 
     });
@@ -104,7 +113,7 @@
         {#if watchingAnime.length > 0 && watchingAnime !== false}
             <animewrapper>
                 {#each watchingAnime as anime}
-                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate=""/>
+                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="" releaseDate=""/>
                 {/each}
             </animewrapper>
         {:else if watchingAnime.length === 0 && watchingAnime !== false}

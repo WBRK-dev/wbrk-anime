@@ -3,10 +3,11 @@
     import { onMount } from "svelte";
     import Searchbar from "../components/searchbar.svelte";
 
-    let accesstoken = ""; let code = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
-    if (browser) {
-        accesstoken = localStorage.getItem("accesstoken") || "";
-    }
+    let code = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
+    let loggedin = false;
+    onMount(() => {
+        fetch("https://wbrk-anime-api.vercel.app/api/list/get", {credentials: "include"}).then(r => r.json()).then(r => {if (!r.error) {loggedin = true}});
+    })
 </script>
 
 <svelte:head>
@@ -24,7 +25,7 @@
         <div class="right">
             <a href="/watch">Featured</a>
         </div>
-        {#if accesstoken === ""}
+        {#if !loggedin}
             <a href='https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=fb5613df0f39524a295b0d1d7a6213ca&code_challenge={code}'>Login</a>
         {:else}
             <a href='account/'>Account</a>
