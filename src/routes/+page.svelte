@@ -185,6 +185,12 @@
         50% {box-shadow: 0 0 15px #0000ff;}
         100% {box-shadow: 0 0 15px #0000ff75;}
     }
+    .show a:focus {animation: pressed 1000ms forwards;}
+    @keyframes pressed {
+        0% {transform: scale(1); box-shadow: 0 0 0px #0000ff; background-color: #0000ff;}
+        50% {transform: scale(0.95); box-shadow: 0 0 200px 50px #0000ff; background-color: #868686;}
+        100% {transform: scale(0.95); box-shadow: 0 0 200px 50px #0000ff00; background-color: #868686;}
+    }
     
 
 

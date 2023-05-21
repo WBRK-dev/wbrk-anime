@@ -36,6 +36,7 @@
 <style>
     header {
         position: relative;
+        padding-right: 15px;
     }
 
     header .title {
