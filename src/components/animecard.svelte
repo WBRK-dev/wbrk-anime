@@ -59,6 +59,7 @@
     a .info .title {
         font-weight: 700;
         font-size: 14px;
+        margin-bottom: 5px;
     }
 
     a .info .footer {

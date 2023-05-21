@@ -69,7 +69,7 @@
             })
         })
 
-        fetch("https://wbrk-anime-api.vercel.app/api/list/get", {credentials: "include"})
+        fetch("https://wbrk-anime-api.vercel.app/api/test/list/get")
         .then(r => r.json()).then(r => {
             if (r.error) {watchingAnime = false; return;}
             for (let i = 0; i < r.data.length; i++) {
@@ -113,7 +113,7 @@
         {#if watchingAnime.length > 0 && watchingAnime !== false}
             <animewrapper>
                 {#each watchingAnime as anime}
-                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="" releaseDate=""/>
+                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate=""/>
                 {/each}
             </animewrapper>
         {:else if watchingAnime.length === 0 && watchingAnime !== false}
