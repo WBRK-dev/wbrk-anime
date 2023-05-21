@@ -8,7 +8,7 @@
     let accesstoken = "";
 
     onMount(async () => {
-        const response = await fetch("https://wbrk-anime-api.vercel.app/api/authorize?code="+authorizationtoken);
+        const response = await fetch("https://wbrk-anime-api.vercel.app/api/authorize?code="+authorizationtoken, {credentials: "include"});
         if (response.status === 200) {
             console.log(response);
             let json = await response.json();
