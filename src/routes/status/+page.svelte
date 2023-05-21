@@ -4,6 +4,8 @@
 
     let consumetIndi = "";
     let consumetLabel = "Checking";
+    let wbrkAnimeIndi = "";
+    let wbrkAnimeLabel = "Checking";
     let malIndi = "error";
     let malLabel = "Offline";
 
@@ -20,6 +22,19 @@
         };
         consumetTest.open("GET", "https://api.consumet.org/anime/gogoanime/spyxfamily");
         consumetTest.send();
+
+        let wbrkAnimeTest = new XMLHttpRequest();
+        consumetTest.onreadystatechange = function() {
+            if (this.status === 200) {
+                consumetIndi = "success";
+                consumetLabel = "Working";
+            } else {
+                consumetIndi = "error";
+                consumetLabel = "Offline";
+            }
+        };
+        wbrkAnimeTest.open("GET", "https://wbrk-anime-api.vercel.app/api/test");
+        wbrkAnimeTest.send();
     })
 
 
@@ -35,6 +50,13 @@
                 <p class="title">Consumet API</p>
             </div>
             <p>Status: {consumetLabel}</p>
+        </div>
+        <div class="server">
+            <div>
+                <div id="indicator" class="{wbrkAnimeIndi}"></div>
+                <p class="title">WBRK Anime API</p>
+            </div>
+            <p>Status: {wbrkAnimeLabel}</p>
         </div>
         <div class="server">
             <div>

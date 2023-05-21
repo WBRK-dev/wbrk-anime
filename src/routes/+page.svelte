@@ -113,7 +113,9 @@
         {#if watchingAnime.length > 0 && watchingAnime !== false}
             <animewrapper>
                 {#each watchingAnime as anime}
-                    <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate=""/>
+                    {#if anime.status === "watching"}
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate=""/>
+                    {/if}
                 {/each}
             </animewrapper>
         {:else if watchingAnime.length === 0 && watchingAnime !== false}
