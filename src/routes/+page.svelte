@@ -68,6 +68,12 @@
                 }
             })
         })
+
+        fetch("https://wbrk-anime-api.vercel.app/api/list/get", {credentials: "include"})
+        .then(r => r.json())
+        .then(r => {
+            console.log(r);
+        })
         
 
     });
