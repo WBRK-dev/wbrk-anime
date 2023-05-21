@@ -14,7 +14,7 @@
             let json = await response.json();
             if (json.succesfull) {
                 accesstoken = "Logged In"
-                let userinfoR = await fetch("https://wbrk-anime-api.vercel.app/api/user/get", {credentials: "include"});
+                let userinfoR = await fetch("https://wbrk-anime-api.vercel.app/api/user/info", {credentials: "include"});
                 let userinfo = await userinfoR.json();
                 console.log(userinfo);
             } else {
