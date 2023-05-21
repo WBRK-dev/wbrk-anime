@@ -10,8 +10,8 @@
     /**@type {Array<string> | any[]}*/
     let topAiringAnime = [];
     /**@type {Array<string> | any[]}*/
-        let topAiringAnimeTemp = [];
-    /**@type {Array<string> | any[]}*/
+    let topAiringAnimeTemp = [];
+    /**@type {any}*/
     let watchingAnime = [];
     /**@type {Array<string> | any[]}*/
     let recentEpisodes = [];
@@ -101,14 +101,18 @@
     </section>
     <section>
         <p class="title">Continue Watching</p>
-        {#if watchingAnime.length > 0 && accesstoken !== ""}
+        {#if watchingAnime.length > 0 && watchingAnime !== false}
             <animewrapper>
                 {#each watchingAnime as anime}
                     <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate=""/>
                 {/each}
             </animewrapper>
-        {:else if watchingAnime.length === 0 && accesstoken !== ""}
-            <p>Watch Anime to continue your watching history.</p>
+        {:else if watchingAnime.length === 0 && watchingAnime !== false}
+            <animewrapper>
+                {#each {length: 16} as _, i}
+                    <AnimeCardSkel/>
+                {/each}
+            </animewrapper>
         {:else}
             <div class="show">
                 <p class="title">Login with My Anime List to create your watch history.</p>
