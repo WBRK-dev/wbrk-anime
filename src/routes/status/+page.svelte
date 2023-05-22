@@ -24,13 +24,13 @@
         consumetTest.send();
 
         let wbrkAnimeTest = new XMLHttpRequest();
-        consumetTest.onreadystatechange = function() {
+        wbrkAnimeTest.onreadystatechange = function() {
             if (this.status === 200) {
-                consumetIndi = "success";
-                consumetLabel = "Working";
+                wbrkAnimeIndi = "success";
+                wbrkAnimeLabel = "Working";
             } else {
-                consumetIndi = "error";
-                consumetLabel = "Offline";
+                wbrkAnimeIndi = "error";
+                wbrkAnimeLabel = "Offline";
             }
         };
         wbrkAnimeTest.open("GET", "https://wbrk-anime-api.vercel.app/api/test");

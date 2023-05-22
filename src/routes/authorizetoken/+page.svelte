@@ -5,7 +5,7 @@
     import { onMount } from 'svelte';
     
     let authorizationtoken = $page.url.searchParams.get('code');
-    let accesstoken = "Logged In"; let userinfo = {"name": "Koert Weber", "watching": 0, "completed": 0, "num_days_watched": 0}
+    let accesstoken = "Logged In"; let userinfo = {"name": "Username", "watching": 0, "completed": 0, "num_days_watched": 0}
 
     onMount(async () => {
         const response = await fetch("https://wbrk-anime-api.vercel.app/api/authorize?code="+authorizationtoken, {credentials: "include"});
@@ -15,8 +15,8 @@
             if (json.succesfull) {
                 accesstoken = "Logged In"
                 let userinfoR = await fetch("https://wbrk-anime-api.vercel.app/api/user/info", {credentials: "include"});
-                let userinfo = await userinfoR.json();
-                console.log(userinfo);
+                let userinfoJ = await userinfoR.json();
+                console.log(userinfoJ);
             } else {
                 accesstoken = "Failed to login"
             }
