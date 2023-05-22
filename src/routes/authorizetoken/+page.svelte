@@ -17,6 +17,10 @@
                 let userinfoR = await fetch("https://wbrk-anime-api.vercel.app/api/user/info", {credentials: "include"});
                 let userinfoJ = await userinfoR.json();
                 console.log(userinfoJ);
+                userinfo.name = userinfoJ.name;
+                userinfo.watching = userinfoJ.anime_statistics.num_items_watched;
+                userinfo.completed = userinfoJ.anime_statistics.num_items_completed;
+                userinfo.num_days_watched = userinfoJ.anime_statistics.num_days_watched;
             } else {
                 accesstoken = "Failed to login"
             }
