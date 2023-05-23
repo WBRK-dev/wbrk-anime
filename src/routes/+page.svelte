@@ -69,7 +69,7 @@
             })
         })
 
-        fetch("https://wbrk-anime-api.vercel.app/api/test/list/get")
+        fetch("https://wbrk-anime-api.vercel.app/api/list/get")
         .then(r => r.json()).then(r => {
             if (r.error) {watchingAnime = false; return;}
             for (let i = 0; i < r.data.length; i++) {

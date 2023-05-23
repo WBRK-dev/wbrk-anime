@@ -7,7 +7,7 @@
     let loggedin = false;
     onMount(() => {
         fetch("https://wbrk-anime-api.vercel.app/api/list/get", {credentials: "include"}).then(r => r.json()).then(r => {if (!r.error) {loggedin = true}});
-    })
+    });
 </script>
 
 <svelte:head>
