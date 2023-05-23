@@ -28,7 +28,7 @@
         <img src="{topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].image}" alt="">
     </div>
     {:else}
-    <div class="spinner"><Spinner/></div>
+    <div class="spinner"><Spinner white={false}/></div>
     {/if}
 </hero>
 
