@@ -43,6 +43,7 @@
     header .title {
         color: #000;
         text-decoration: none;
+        white-space: nowrap;
     }
 
     header a {
