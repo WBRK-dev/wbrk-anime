@@ -87,13 +87,14 @@
         display: grid;
         margin: 20px auto 0 auto;
         overflow: hidden;
+        width: min(calc(100% - 20px), 610px);
 
         grid-template-columns: 1fr 1fr;
         gap: 10px;
     }
 
     div.server {
-        width: 300px;
+        /* width: 100%; */
         padding: 10px;
         border: 1px solid #b8b8b8;
         border-radius: 10px;
@@ -133,5 +134,13 @@
         background-color: green;
         border: 1px solid green;
         animation: unset;
+    }
+
+
+
+    @media only screen and (max-width: 500px) {
+        .servers {
+            grid-template-columns: 1fr !important;
+        }
     }
 </style>
