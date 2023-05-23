@@ -190,6 +190,7 @@
     .show .title {
         font-size: 22px;
         font-weight: 700;
+        text-align: center;
     }
 
     .show a {
