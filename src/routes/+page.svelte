@@ -1,17 +1,27 @@
 <script>
+    import { browser } from "$app/environment";
     import { onMount } from "svelte";
     import HeroCard from "../components/topairingcard.svelte";
     import AnimeCard from "../components/animecard.svelte";
     import AnimeCardSkel from "../components/animecardskeleton.svelte";
-    import Spinner from "../components/spinner.svelte";
+    let code = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
+    /**@type {any}*/
+    export let data;
     /**@type {Array<string> | any[]}*/
     let topAiringAnime = [];
     /**@type {Array<string> | any[]}*/
-        let topAiringAnimeTemp = [];
-    /**@type {Array<string> | any[]}*/
+    let topAiringAnimeTemp = [];
+    /**@type {any}*/
     let watchingAnime = [];
     /**@type {Array<string> | any[]}*/
     let recentEpisodes = [];
+    let impMessage = "none";
+
+    let accesstoken = "";
+    if (browser) {
+        accesstoken = localStorage.getItem("accesstoken") || "";
+        console.log(accesstoken);
+    }
     
     onMount(async () => {
         fetch("https://api.consumet.org/anime/gogoanime/top-airing")
@@ -35,7 +45,7 @@
                     })
                 }
             })
-        })
+        }).catch(err => {impMessage = "block"})
 
         fetch("https://api.consumet.org/anime/gogoanime/recent-episodes")
         .then(response => response.json())
@@ -58,6 +68,21 @@
                 }
             })
         })
+
+        fetch("https://wbrk-anime-api.vercel.app/api/list/get")
+        .then(r => r.json()).then(r => {
+            if (r.error) {watchingAnime = false; return;}
+            for (let i = 0; i < r.data.length; i++) {
+                watchingAnime.push({
+                    id: r.data[i].node.id,
+                    title: r.data[i].node.title,
+                    image: r.data[i].node.main_picture.medium,
+                    status: r.data[i].list_status.status,
+                    epsWatched: r.data[i].list_status.num_episodes_watched
+                })
+            }
+        })
+        .catch(err => {watchingAnime = false})
         
 
     });
@@ -65,6 +90,8 @@
 </script>
 
 <main>
+    <div class="impMessage" style="display: {impMessage};">Some important services are offline. <a href="/status">WBRK Anime Status</a></div>
+
     <HeroCard topAiringAnime={topAiringAnime}/>
 
     <section id="popular">
@@ -81,16 +108,29 @@
                 {/if}
         </animewrapper>
     </section>
-    {#if watchingAnime.length > 0}
     <section>
         <p class="title">Continue Watching</p>
-        <animewrapper>
-            {#each watchingAnime as anime}
-                <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate=""/>
-            {/each}
-        </animewrapper>
+        {#if watchingAnime.length > 0 && watchingAnime !== false}
+            <animewrapper>
+                {#each watchingAnime as anime}
+                    {#if anime.status === "watching"}
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate=""/>
+                    {/if}
+                {/each}
+            </animewrapper>
+        {:else if watchingAnime.length === 0 && watchingAnime !== false}
+            <animewrapper>
+                {#each {length: 16} as _, i}
+                    <AnimeCardSkel/>
+                {/each}
+            </animewrapper>
+        {:else}
+            <div class="show">
+                <p class="title">Login with My Anime List to create your watch history.</p>
+                <a href='https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=fb5613df0f39524a295b0d1d7a6213ca&code_challenge={code}'>Login With MAL</a>
+            </div>
+        {/if}
     </section>
-    {/if}
     <section>
         <p class="title">Recent Episodes</p>
         <animewrapper>
@@ -125,6 +165,8 @@
         font-weight: 700;
     }
 
+    .impMessage {text-align: center;}
+
     animewrapper {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -136,8 +178,39 @@
         margin-top: -10px;
     }
 
-    .spinner {
-        padding: 10px;
+    .show {
+        padding: 40px 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .show .title {
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .show a {
+        background-color: blue;
+        color: #fff; text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 8px;
+
+        animation: shadow 2s infinite;
+    }
+
+    @keyframes shadow {
+        0% {box-shadow: 0 0 15px #0000ff75;}
+        50% {box-shadow: 0 0 15px #0000ff;}
+        100% {box-shadow: 0 0 15px #0000ff75;}
+    }
+    .show a:focus {animation: pressed 1000ms forwards;}
+    @keyframes pressed {
+        0% {transform: scale(1); box-shadow: 0 0 0px #0000ff; background-color: #0000ff;}
+        50% {transform: scale(0.95); box-shadow: 0 0 200px 50px #0000ff; background-color: #868686;}
+        100% {transform: scale(0.95); box-shadow: 0 0 200px 50px #0000ff00; background-color: #868686;}
     }
     
 
