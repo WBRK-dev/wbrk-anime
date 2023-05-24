@@ -1,4 +1,11 @@
-<div class="spinner"></div>
+<script>
+    /**
+     * @type {boolean} white
+     */
+    export let white;
+</script>
+
+<div class="spinner" class:white={white}></div>
 
 <style>
     .spinner {
@@ -9,6 +16,10 @@
         border-radius: 50%;
 
         animation: spin 1s linear infinite;
+    }
+
+    .spinner.white {
+        border-top: 2px solid #fff;
     }
 
     @keyframes spin {
