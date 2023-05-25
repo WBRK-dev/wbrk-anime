@@ -1,16 +1,19 @@
 <script>
     import Spinner from "../../../components/spinner.svelte";
+    
 
-    /**@type {any}*/
-    export let episodes;
+    /**
+     * @type {any}
+    */
+    export let episodes, episodeButtons;
 </script>
 
 <main>
     {#if !episodes}
         <div class="center"><Spinner white={true}/></div>
     {:else}
-        {#each episodes as episode}
-            <div class="episode">{episode.number}</div>
+        {#each episodes as episode, i}
+            <div class="episode" bind:this={episodeButtons[i]}>{episode.number}</div>
         {/each}
     {/if}
 </main>

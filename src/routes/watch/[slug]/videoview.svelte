@@ -3,11 +3,10 @@
     export let url;
 </script>
 
-<!-- <iframe title="" src="{url}" frameborder="0"></iframe> -->
-<video src="{url}" type="application/x-mpegURL" controls></video>
+<iframe title="" src="{url}" frameborder="0" sandbox="allow-same-origin allow-scripts"></iframe>
 
 <style>
-    video {
+    iframe {
         display: block;
         background-color: #000;
         aspect-ratio: 16/9;

@@ -10,7 +10,7 @@
     <div class="content">
         <div class="info">
             <p class="title">{topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].title}</p>
-            <p class="id">Released: {topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].releaseDate}</p>
+            <p class="id">Released: {(topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].releaseDate) ? topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].releaseDate : "??"}</p>
             <div class="flex" id="categories">
                 {#each topAiringAnime[Math.floor((topAiringAnime.length - 1) * selectedAnime)].genres as genre}
                     <p class="tag">{genre}</p>
