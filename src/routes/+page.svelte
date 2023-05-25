@@ -16,12 +16,6 @@
     /**@type {Array<string> | any[]}*/
     let recentEpisodes = [];
     let impMessage = "none";
-
-    let accesstoken = "";
-    if (browser) {
-        accesstoken = localStorage.getItem("accesstoken") || "";
-        console.log(accesstoken);
-    }
     
     onMount(async () => {
         fetch("https://api.consumet.org/anime/gogoanime/top-airing")
@@ -190,6 +184,7 @@
     .show .title {
         font-size: 22px;
         font-weight: 700;
+        text-align: center;
     }
 
     .show a {
