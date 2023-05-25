@@ -3,7 +3,7 @@
     export let url;
 </script>
 
-<iframe title="" src="{url}" frameborder="0" sandbox="allow-same-origin allow-scripts"></iframe>
+<iframe title="" src="{url}" frameborder="0" sandbox="allow-same-origin allow-scripts" allowfullscreen></iframe>
 
 <style>
     iframe {

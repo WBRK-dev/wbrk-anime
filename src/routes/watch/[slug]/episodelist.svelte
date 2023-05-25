@@ -1,11 +1,22 @@
 <script>
     import Spinner from "../../../components/spinner.svelte";
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
     
 
     /**
      * @type {any}
     */
     export let episodes, episodeButtons;
+
+
+    /**@param {Number} i*/
+    function changeEpisode(i) {
+        dispatch('episode', {
+			number: i
+		});
+    }
 </script>
 
 <main>
@@ -13,7 +24,7 @@
         <div class="center"><Spinner white={true}/></div>
     {:else}
         {#each episodes as episode, i}
-            <div class="episode" bind:this={episodeButtons[i]}>{episode.number}</div>
+            <div class="episode" bind:this={episodeButtons[i]} on:click={() => changeEpisode(i)}>{episode.number}</div>
         {/each}
     {/if}
 </main>

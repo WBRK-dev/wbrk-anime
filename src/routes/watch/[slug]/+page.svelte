@@ -12,6 +12,9 @@
     /**@type {any}*/let animeStreamLinks = [];
     /**@type {string}*/let streamUrl = "";
     /**@type {any}*/let episodeButtons = [];
+    /**@type {any}*/let streamButtons = [];
+    /**@type {number}*/let currentEpisode = 0;
+    /**@type {string}*/let currentStreamName = "Vidstreaming";
 
     onMount(() => {
         fetch(`https://api.consumet.org/anime/gogoanime/info/${data.slug}`)
@@ -23,15 +26,65 @@
             .then(r => {
                 animeStreamLinks = r;
                 streamUrl = r[0].url;
+                currentEpisode = 1;
+                changeEpisodeButtonsStyle(0);
+                changeStreamButtonsStyle(currentStreamName);
             });
         });
     });
 
-    /**
-     * @param {Number} i
-     */
-    function changeEpisode(i) {
-        console.log(i);
+    /**@param {any} event*/
+    async function changeEpisode(event) {
+        changeEpisodeButtonsStyle(false);
+        // TODO - Change video on episode event.
+
+        let responseT = await fetch(`https://api.consumet.org/anime/gogoanime/servers/${data.slug}-episode-${event.detail.number+1}`);
+        let responseJ = await responseT.json();
+        streamUrl = responseJ[0].url;
+
+        currentEpisode = event.detail.number + 1;
+        changeEpisodeButtonsStyle(event.detail.number);
+    }
+
+    /**@param {number | boolean} i*/
+    function changeEpisodeButtonsStyle(i) {
+        for (let j = 0; j < episodeButtons.length; j++) {
+            episodeButtons[j].style.backgroundColor = "#353535";
+        }
+        if (typeof i === 'number') {
+            episodeButtons[i].style.backgroundColor = "#494949";
+        }
+    }
+
+    /**@param {any} event*/
+    function changeStream(event) {
+        changeStreamButtonsStyle(false);
+        // TODO - Change video on stream event.
+
+
+        changeStreamButtonsStyle(event.detail.stream);
+        console.log(event.detail.stream);
+    }
+
+    /**@param {number | string | boolean} i*/
+    function changeStreamButtonsStyle(i) {
+        for (let j = 0; j < streamButtons.length; j++) {
+            streamButtons[j].classList.remove("active");
+        }
+        if (typeof i === "number") {
+            streamButtons[i].classList.add("active");
+        } else if (typeof i === 'string') {
+            let found = false;
+            for (let j = 0; j < streamButtons.length; j++) {
+                if (streamButtons[j].innerHTML === i) {
+                    found = true;
+                    streamButtons[j].classList.add("active");
+                }
+            }
+            if (!found) {
+                streamButtons[0].classList.add("active");
+            }
+        }
     }
 </script>
 
@@ -39,12 +92,12 @@
     <div class="width">
         <div class="row">
             <Iframe url={streamUrl}/>
-            <EpisodeControls episodeLinks={animeStreamLinks}/>
+            <EpisodeControls episodeLinks={animeStreamLinks} streamButtons={streamButtons} episode={currentEpisode} on:streamchange={changeStream}/>
             <Malcontroller/>
         </div>
         <div class="row">
             <AnimeDetails details={animeDetails}/>
-            <EpisodeList episodes={animeDetails.episodes} bind:episodeButtons/>
+            <EpisodeList episodes={animeDetails.episodes} bind:episodeButtons on:episode={changeEpisode}/>
         </div>
     </div>
 </main>

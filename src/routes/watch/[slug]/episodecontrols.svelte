@@ -1,11 +1,22 @@
 <script>
     import Spinner from "../../../components/spinner.svelte";
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
 
     /** @type {any}*/export let episodeLinks;
+    /**@type {any}*/export let streamButtons;
+    // /**@type {number}*/export let episode;
+
+    /**@param {string} streamName*/
+    function changeStream(streamName) {
+        dispatch('streamchange', {
+			stream: streamName
+		});
+    }
 </script>
 
 <main>
-    <div class="row"><p>Currently watching episode 9</p></div>
+    <!-- <div class="row"><p>Currently watching episode {episode}</p></div> -->
     <div class="row">
         <div class="button">Previous</div>
         <div class="button">Next</div>
@@ -14,8 +25,8 @@
         <div class="center"><Spinner white={true}/></div>
     {:else}
         <div class="row" id="links">
-        {#each episodeLinks as link}
-            <div class="link">{link.name}</div>
+        {#each episodeLinks as link, i}
+            <div class="link" bind:this={streamButtons[i]} on:click={() => changeStream(link.name)} class:active={false}>{link.name}</div>
         {/each}
         </div>
     {/if}
@@ -67,4 +78,7 @@
         cursor: pointer;
     }
     .link:hover {background-color: #494949;}
+    .link.active {
+        background-color: #494949;
+    }
 </style>
