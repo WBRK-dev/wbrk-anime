@@ -79,7 +79,7 @@
             })
         })
 
-        fetch("https://wbrk-anime-api.cyclic.app/api/list/get", {credentials: "include"})
+        fetch("https://wbrk-anime-api.cyclic.app/list/get", {credentials: "include"})
         .then(r => r.json()).then(r => {
             if (r.error) {watchingAnime = false; return;}
             for (let i = 0; i < r.data.length; i++) {
