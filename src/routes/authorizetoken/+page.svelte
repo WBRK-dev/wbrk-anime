@@ -8,12 +8,12 @@
     let authorized = 0; let userinfo = {"name": "Username", "watching": 0, "completed": 0, "num_days_watched": 0}
 
     onMount(async () => {
-        const response = await fetch("https://wbrk-anime-api.vercel.app/api/authorize?code="+authorizationtoken, {credentials: "include"});
+        const response = await fetch("https://wbrk-anime-api.cyclic.app/api/authorize?code="+authorizationtoken, {credentials: "include"});
         if (response.status === 200) {
             console.log(response);
             let json = await response.json();
             if (json.succesfull) {
-                let userinfoR = await fetch("https://wbrk-anime-api.vercel.app/api/user/info", {credentials: "include"});
+                let userinfoR = await fetch("https://wbrk-anime-api.cyclic.app/api/user/info", {credentials: "include"});
                 let userinfoJ = await userinfoR.json();
                 userinfo.name = userinfoJ.name;
                 userinfo.watching = userinfoJ.anime_statistics.num_items_watching;

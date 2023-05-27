@@ -6,7 +6,7 @@
     let code = "this-is-bs-and-i-hate-this-part-so-just-make-something-really-massive";
     let loggedin = false;
     onMount(() => {
-        fetch("https://wbrk-anime-api.vercel.app/api/list/get", {credentials: "include"}).then(r => r.json()).then(r => {if (!r.error) {loggedin = true}});
+        fetch("https://wbrk-anime-api.cyclic.app/api/list/get", {credentials: "include"}).then(r => r.json()).then(r => {if (!r.error) {loggedin = true}});
     });
 </script>
 
