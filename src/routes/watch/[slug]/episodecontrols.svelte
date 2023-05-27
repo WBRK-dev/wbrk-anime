@@ -5,7 +5,7 @@
 
     /** @type {any}*/export let episodeLinks;
     /**@type {any}*/export let streamButtons;
-    // /**@type {number}*/export let episode;
+    /**@type {number}*/export let episode;
 
     /**@param {string} streamName*/
     function changeStream(streamName) {

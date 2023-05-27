@@ -36,6 +36,14 @@
                         topAiringAnime[i].subOrDub = data.subOrDub;
                         topAiringAnime[i].totalEpisodes = data.totalEpisodes;
                         topAiringAnime[i].releaseDate = data.releaseDate;
+
+                        if (topAiringAnime[i].subOrDub === "sub") {
+                            fetch(`https://api.consumet.org/anime/gogoanime/info/${topAiringAnime[i].id}-dub`)
+                            .then(r => r.json())
+                            .then(r => {
+                                topAiringAnime[i].dub = (r.message) ? false : true;
+                            })
+                        }
                     })
                 }
             })
@@ -58,6 +66,14 @@
                         recentEpisodes[i].subOrDub = data.subOrDub;
                         recentEpisodes[i].totalEpisodes = data.totalEpisodes;
                         recentEpisodes[i].releaseDate = data.releaseDate;
+
+                        if (recentEpisodes[i].subOrDub === "sub") {
+                            fetch(`https://api.consumet.org/anime/gogoanime/info/${recentEpisodes[i].id}-dub`)
+                            .then(r => r.json())
+                            .then(r => {
+                                recentEpisodes[i].dub = (r.message) ? false : true;
+                            })
+                        }
                     })
                 }
             })
@@ -93,7 +109,7 @@
         <animewrapper>
                 {#if topAiringAnime.length > 0}
                     {#each topAiringAnime as anime}
-                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} />
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} dubbed={anime.dub} />
                     {/each}
                 {:else}
                     {#each {length: 16} as _, i}
@@ -108,7 +124,7 @@
             <animewrapper>
                 {#each watchingAnime as anime}
                     {#if anime.status === "watching"}
-                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate=""/>
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate="" dubbed=""/>
                     {/if}
                 {/each}
             </animewrapper>
@@ -130,7 +146,7 @@
         <animewrapper>
                 {#if recentEpisodes.length > 0}
                     {#each recentEpisodes as anime}
-                            <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate}/>
+                            <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} dubbed={anime.dub}/>
                     {/each}
                 {:else}
                     {#each {length: 16} as _, i}

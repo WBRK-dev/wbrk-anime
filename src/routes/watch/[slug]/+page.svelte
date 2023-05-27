@@ -9,6 +9,7 @@
     export let data;
 
     /**@type {any}*/let animeDetails = {};
+    /**@type {any}*/let animeDubDetails = {};
     /**@type {any}*/let animeStreamLinks = [];
     /**@type {string}*/let streamUrl = "";
     /**@type {any}*/let episodeButtons = [];
@@ -30,6 +31,10 @@
                 changeEpisodeButtonsStyle(0);
                 changeStreamButtonsStyle(currentStreamName);
             });
+
+            fetch(`https://api.consumet.org/anime/gogoanime/info/${data.slug}-dub`)
+            .then(r => r.json())
+            .then(r => animeDubDetails = r);
         });
     });
 
@@ -96,7 +101,7 @@
             <Malcontroller/>
         </div>
         <div class="row">
-            <AnimeDetails details={animeDetails}/>
+            <AnimeDetails details={animeDetails} dubDetails={animeDubDetails}/>
             <EpisodeList episodes={animeDetails.episodes} bind:episodeButtons on:episode={changeEpisode}/>
         </div>
     </div>

@@ -1,9 +1,8 @@
 <script>
     import Spinner from "../../../components/spinner.svelte";
 
-    /**@type {any}*/
-    export let details;
-    console.log(details);
+    /**@type {any}*/export let details;
+    /**@type {any}*/export let dubDetails;
 </script>
 
 <main>
@@ -13,8 +12,14 @@
         <div class="center"><img src={details.image} alt=""></div>
         <h2>{details.title}</h2>
         <p>{details.description}</p>
+        <p>Episodes: {details.totalEpisodes}</p>
         <p>Status: {details.status}</p>
         <p>Released: {details.releaseDate}</p>
+        {#if !dubDetails.message && details.subOrDub === "sub"}
+            <button onclick="javascript:window.open('./{dubDetails.id}','_self')">Dubbed version</button>
+        {:else if details.subOrDub === "dub"}
+            <button onclick="javascript:window.open('./{details.id.replace(new RegExp("\\b" + "-dub" + "\\b", "g"), "")}','_self')">Subbed version</button>
+        {/if}
     {/if}
 </main>
 
@@ -42,5 +47,10 @@
         max-height: 100px;
         overflow: hidden auto;
         color: #f0f0f0;
+    }
+
+    button {
+        margin-top: 5px;
+        width: 100%;
     }
 </style>

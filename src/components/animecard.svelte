@@ -1,5 +1,5 @@
 <script>
-    export let id, title, img, subOrDub, releaseDate;
+    export let id, title, img, subOrDub, releaseDate, dubbed;
 </script>
 
 <a data-id={id} href="watch/{id}">
@@ -9,6 +9,9 @@
         <div class="footer">
             {#if subOrDub !== undefined}
                 <div class="tag">{subOrDub.toUpperCase()}</div>
+            {/if}
+            {#if dubbed}
+                <div class="tag">DUB</div>
             {/if}
             {#if releaseDate !== undefined}
                 <p>{releaseDate}</p>
@@ -66,6 +69,7 @@
         display: flex;
         align-items: center;
         margin-top: auto;
+        gap: 5px;
     }
 
     a .info .footer .tag {
@@ -77,7 +81,7 @@
         padding: 2px 4px;
     }
 
-    a .info .footer > *:first-child {
-        margin-right: auto;
+    a .info .footer > *:last-child {
+        margin-left: auto;
     }
 </style>
