@@ -33,7 +33,7 @@
                 wbrkAnimeLabel = "Offline";
             }
         };
-        wbrkAnimeTest.open("GET", "https://wbrk-anime-api.cyclic.app/test");
+        wbrkAnimeTest.open("GET", "https://wbrk-anime-api.vercel.app/api/test");
         wbrkAnimeTest.send();
     })
 

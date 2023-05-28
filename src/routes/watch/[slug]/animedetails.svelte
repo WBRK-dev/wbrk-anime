@@ -15,11 +15,12 @@
         <p>Episodes: {details.totalEpisodes}</p>
         <p>Status: {details.status}</p>
         <p>Released: {details.releaseDate}</p>
-        {#if !dubDetails.message && details.subOrDub === "sub"}
+        {#if dubDetails.subOrDub === "dub" && details.subOrDub === "sub"}
             <button onclick="javascript:window.open('./{dubDetails.id}','_self')">Dubbed version</button>
         {:else if details.subOrDub === "dub"}
             <button onclick="javascript:window.open('./{details.id.replace(new RegExp("\\b" + "-dub" + "\\b", "g"), "")}','_self')">Subbed version</button>
         {/if}
+        <!-- <button>Subscribe</button> -->
     {/if}
 </main>
 
@@ -50,7 +51,7 @@
     }
 
     button {
-        margin-top: 5px;
+        margin-top: 10px;
         width: 100%;
     }
 </style>

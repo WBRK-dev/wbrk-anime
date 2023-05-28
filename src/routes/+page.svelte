@@ -79,7 +79,7 @@
             })
         })
 
-        fetch("https://wbrk-anime-api.cyclic.app/list/get", {credentials: "include"})
+        fetch("https://wbrk-anime-api.vercel.app/api/list/get", {credentials: "include"})
         .then(r => r.json()).then(r => {
             if (r.error) {watchingAnime = false; return;}
             for (let i = 0; i < r.data.length; i++) {
@@ -109,7 +109,7 @@
         <animewrapper>
                 {#if topAiringAnime.length > 0}
                     {#each topAiringAnime as anime}
-                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} dubbed={anime.dub} />
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} dubbed={anime.dub} totalEpisodes={anime.totalEpisodes}/>
                     {/each}
                 {:else}
                     {#each {length: 16} as _, i}
@@ -124,7 +124,7 @@
             <animewrapper>
                 {#each watchingAnime as anime}
                     {#if anime.status === "watching"}
-                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate="" dubbed=""/>
+                        <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub="Ep {String(anime.epsWatched)}" releaseDate="" dubbed="" totalEpisodes=""/>
                     {/if}
                 {/each}
             </animewrapper>
@@ -146,7 +146,7 @@
         <animewrapper>
                 {#if recentEpisodes.length > 0}
                     {#each recentEpisodes as anime}
-                            <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} dubbed={anime.dub}/>
+                            <AnimeCard id={anime.id} title={anime.title} img={anime.image} subOrDub={anime.subOrDub} releaseDate={anime.releaseDate} dubbed={anime.dub} totalEpisodes={anime.totalEpisodes}/>
                     {/each}
                 {:else}
                     {#each {length: 16} as _, i}
