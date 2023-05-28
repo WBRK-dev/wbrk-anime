@@ -1,5 +1,5 @@
 <script>
-    export let id, title, img, subOrDub, releaseDate, dubbed;
+    export let id, title, img, subOrDub, releaseDate, dubbed, totalEpisodes;
 </script>
 
 <a data-id={id} href="watch/{id}">
@@ -18,6 +18,9 @@
             {/if}
         </div>
     </div>
+    {#if totalEpisodes}
+    <div class="eps">{totalEpisodes}</div>
+    {/if}
 </a>
 
 <style>
@@ -35,6 +38,7 @@
 
         transform: scale(1);
 
+        position: relative;
         overflow: hidden;
         cursor: pointer;
         transition: box-shadow 250ms, transform 250ms;
@@ -83,5 +87,16 @@
 
     a .info .footer > *:last-child {
         margin-left: auto;
+    }
+
+    .eps {
+        position: absolute;
+        top: 5px; right: 5px;
+        padding: 2px 4px;
+        border-radius: 5px;
+        background-color: #0000005d;
+        color: #fff;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
     }
 </style>
